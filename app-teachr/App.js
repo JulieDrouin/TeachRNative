@@ -9,7 +9,7 @@ export default function App() {
       <SafeAreaView style={styles.viewHeader}>
         <View
           style={{
-            paddingLeft: 50,
+            paddingLeft: 30,
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -37,17 +37,14 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: "blue",
     alignItems: "center",
     justifyContent: "center",
   },
   viewHeader: {
     flex: 1,
-    backgroundColor: "#1a57d5",
+    backgroundColor: "#1E90FF",
     flexWrap: "wrap",
     fontWeight: "bold",
-    // fontSize: 20,
-    // color: "white",
     alignItems: "center",
     justifyContent: "center",
     width: Dimensions.get("window").width,
@@ -55,16 +52,13 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     flex: 2,
-    // backgroundColor: "rebeccapurple",
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: 150,
   },
   viewCaroussel: {
     flex: 2,
-    paddingTop: 20,
+    marginTop: 20,
     paddingBottom: 20,
-    // backgroundColor: "yellow",
     flexDirection: "row",
     justifyContent: "center",
   },

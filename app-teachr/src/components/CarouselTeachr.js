@@ -1,7 +1,7 @@
 import * as React from "react";
 import { View, Text, StyleSheet, Image, Button } from "react-native";
 import Carousel from "react-native-snap-carousel";
-
+import AppButton from "./AppButton";
 export default class CarouselTeachr extends React.Component {
   constructor(props) {
     super(props);
@@ -9,80 +9,80 @@ export default class CarouselTeachr extends React.Component {
       activeIndex: 0,
       carouselItems: [
         {
-          firstname: "Jérome",
-          lastname: "Du Jardin",
+          firstname: "Brice",
+          lastname: "De Nice",
           formation: "Université Paris Dauphine",
           description:
             "Pédagogue et calme, je sais m'adapter à l'élève et comprendre sa méthode d'apprentissage afin de l'aider à progresser au mieux.",
           image: require("../image/chocobo.jpg"),
         },
         {
-          firstname: "Cyril",
-          lastname: "Du Jardin",
+          firstname: "Bat",
+          lastname: "Man",
           formation: "Université Paris Dauphine",
           description:
             "Pédagogue et calme, je sais m'adapter à l'élève et comprendre sa méthode d'apprentissage afin de l'aider à progresser au mieux.",
           image: require("../image/batman.jpg"),
         },
         {
-          firstname: "Bernadette",
-          lastname: "Du Jardin",
+          firstname: "No",
+          lastname: "Panic",
           formation: "Université Paris Dauphine",
           description:
             "Pédagogue et calme, je sais m'adapter à l'élève et comprendre sa méthode d'apprentissage afin de l'aider à progresser au mieux.",
           image: require("../image/oups.jpg"),
         },
         {
-          firstname: "Angélique",
-          lastname: "Du Jardin",
+          firstname: "Pika",
+          lastname: "Chu",
           formation: "Université Paris Dauphine",
           description:
             "Pédagogue et calme, je sais m'adapter à l'élève et comprendre sa méthode d'apprentissage afin de l'aider à progresser au mieux.",
           image: require("../image/pikachu.jpg"),
         },
         {
-          firstname: "Camille",
-          lastname: "Du Jardin",
+          firstname: "Pin",
+          lastname: "Gu",
           formation: "Université Paris Dauphine",
           description:
             "Pédagogue et calme, je sais m'adapter à l'élève et comprendre sa méthode d'apprentissage afin de l'aider à progresser au mieux.",
           image: require("../image/pingu.jpg"),
         },
         {
-          firstname: "Boby",
-          lastname: "Du Jardin",
+          firstname: "Coubo",
+          lastname: "Le Mog",
           formation: "Université Paris Dauphine",
           description:
             "Pédagogue et calme, je sais m'adapter à l'élève et comprendre sa méthode d'apprentissage afin de l'aider à progresser au mieux.",
           image: require("../image/mog.jpg"),
         },
         {
-          firstname: "Charlène",
-          lastname: "Du Jardin",
+          firstname: "Porg",
+          lastname: "Hero",
           formation: "Université Paris Dauphine",
           description:
             "Pédagogue et calme, je sais m'adapter à l'élève et comprendre sa méthode d'apprentissage afin de l'aider à progresser au mieux.",
           image: require("../image/porg.jpeg"),
         },
         {
-          firstname: "David",
-          lastname: "Du Jardin",
+          firstname: "Spider",
+          lastname: "Man",
           formation: "Université Paris Dauphine",
           description:
             "Pédagogue et calme, je sais m'adapter à l'élève et comprendre sa méthode d'apprentissage afin de l'aider à progresser au mieux.",
           image: require("../image/spider.jpg"),
         },
         {
-          firstname: "Gwendoline",
-          lastname: "Du Jardin",
+          firstname: "Pile",
+          lastname: "Ou Face",
           formation: "Université Paris Dauphine",
           description:
             "Pédagogue et calme, je sais m'adapter à l'élève et comprendre sa méthode d'apprentissage afin de l'aider à progresser au mieux.",
           image: require("../image/cat.jpg"),
         },
         {
-          firstname: "Aurélie",
-          lastname: "Du Jardin",
+          firstname: "Guizmo",
+          lastname: "Sweet",
           formation: "Université Paris Dauphine",
           description:
             "Pédagogue et calme, je sais m'adapter à l'élève et comprendre sa méthode d'apprentissage afin de l'aider à progresser au mieux.",
@@ -106,7 +106,7 @@ export default class CarouselTeachr extends React.Component {
             }}
             source={item.image}
           />
-          <View style={{ flex: 1, marginLeft: 10, fontSize: 25 }}>
+          <View style={{ flex: 1, marginLeft: 25, fontSize: 25 }}>
             <Text style={styles.firstname}>{item.firstname}</Text>
             <Text style={styles.lastname}>{item.lastname}</Text>
           </View>
@@ -117,14 +117,22 @@ export default class CarouselTeachr extends React.Component {
             <Text style={{ color: "grey" }}>Formation</Text>
             <Text style={styles.formation}>{item.formation}</Text>
           </View>
-          <View style={{ flex: 2, marginTop: 10 }}>
+          <View style={{ flex: 3, marginTop: 10 }}>
             <Text style={{ color: "grey" }}>Description</Text>
             <Text style={styles.description}>{item.description}</Text>
           </View>
 
           <View style={{ flex: 2 }}>
-            <Button title="Prendre un cours avec ce Teach'r"></Button>
-            <Button title="Retirer ce Teach'r de mes favoris"></Button>
+            <AppButton
+              title="Prendre un cours avec ce Teach'r"
+              size="sm"
+              backgroundColor="#007bff"
+            />
+            <AppButton
+              title="Retirer ce Teach'r de mes favoris"
+              size="sm"
+              backgroundColor="#007bff"
+            />
           </View>
         </View>
       </View>
@@ -153,14 +161,19 @@ const styles = StyleSheet.create({
   containerInfoTeach: {
     flexDirection: "column",
     backgroundColor: "white",
-    borderRadius: 6,
+    borderRadius: 5,
     height: 400,
-    padding: 18,
-    marginLeft: 30,
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 0.4,
-    shadowRadius: 5,
-    elevation: 1,
+    padding: 16,
+    marginLeft: 25,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.34,
+    shadowRadius: 6.27,
+
+    elevation: 10,
   },
   firstname: {
     flex: 1,
@@ -175,9 +188,11 @@ const styles = StyleSheet.create({
   formation: {
     flex: 1,
     justifyContent: "center",
+    fontWeight: "bold",
   },
   description: {
     flex: 3,
     justifyContent: "center",
+    fontWeight: "bold",
   },
 });
