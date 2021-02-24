@@ -54,9 +54,6 @@ class Teachr
 
     public function setDatecreate(\DateTimeInterface $datecreate): self
     {
-        // $category->setCreatedTs(new \DateTime())
-        // $dateTimeNow = new $datecreate('@'.strtotime('now'));
-
         $this->datecreate = $datecreate;
 
         return $this;
