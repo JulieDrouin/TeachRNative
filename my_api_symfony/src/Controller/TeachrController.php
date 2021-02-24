@@ -6,12 +6,10 @@ use App\Entity\Teachr;
 use App\Repository\TeachrRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -22,9 +20,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class TeachrController extends AbstractController
 {
     /**
-     * @Route("/api/teachr", name="api_teachr_index", methods={"GET"})
+     * @Route("/api/teachrs", name="api_teachr_index", methods={"GET"})
      */
-    public function index(TeachrRepository $teachrRepository):Response
+    public function index(TeachrRepository $teachrRepository):JsonResponse
     {
         $teachrs = $teachrRepository->findAll();
         return $this->json($teachrs, 200,[], ['groups' => 'teachr:read']);
@@ -33,15 +31,12 @@ class TeachrController extends AbstractController
     /**
      * @Route("/api/teachr", name="api_teachr_createTeachr", methods={"POST"})
      */
-    public function createTeachr(Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
+    public function createTeachr(Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager):JsonResponse
     {
-
         $jsonRecu = $request->getContent();
-
         try {
             $teachr = $serializer->deserialize($jsonRecu, Teachr::class, 'json');
             $teachr->setDatecreate(new \DateTime());
-
             $entityManager->persist($teachr);
             $entityManager->flush();
 
@@ -57,8 +52,23 @@ class TeachrController extends AbstractController
     /**
      * @Route("/api/teachr/{id<\d+>?1}", name="api_teachr_updateTeachr", methods={"PUT"})
      */
-    public function updateTeachr(TeachrRepository $teachrRepository, int $id, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager, ValidatorInterface $validator)
+    public function updateTeachr(TeachrRepository $teachrRepository, int $id, Request $request, EntityManagerInterface $entityManager):JsonResponse
     {
-
+        $teachr = $entityManager->getRepository(Teachr::class)->find($id);
+        $data = json_decode($request->getContent(), true);
+        foreach($data as $clef => $valeur){
+            $teachr->setFirstName($valeur);
+            $teachrRepository->updateTeachr($teachr,$valeur);
+        }
+        return new JsonResponse(['status' => 'customer updated!']);
+    }
+    /**
+     * @Route("/api/teachr/{id<\d+>?1}", name="api_teachr_deleteTeachr", methods={"DELETE"})
+     */
+    public function deleteTeachr(TeachrRepository $teachrRepository, int $id, Request $request, EntityManagerInterface $entityManager):JsonResponse
+    {
+        $teachr = $entityManager->getRepository(Teachr::class)->find($id);
+        $teachrRepository->removeTeachr($teachr);
+        return new JsonResponse(['status' => 'customer deleted']);
     }
 }

@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Teachr;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Teachr|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,9 +15,12 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class TeachrRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $manager;
+
+    public function __construct(ManagerRegistry $registry,EntityManagerInterface $manager)
     {
         parent::__construct($registry, Teachr::class);
+        $this->manager = $manager;
     }
 
     // /**
@@ -47,4 +51,15 @@ class TeachrRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function updateTeachr(Teachr $teachr, $data)
+    {
+        empty($data['firstName']) ? true : $teachr->setFirstName($data['firstName']);
+
+        $this->manager->flush();
+    }
+    public function removeTeachr(Teachr $teachr)
+    {
+        $this->manager->remove($teachr);
+        $this->manager->flush();
+    }
 }
